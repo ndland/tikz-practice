@@ -137,6 +137,7 @@ pythontex-files-*/
 *.dpth
 *.md5
 *.auxlock
+*.pgf
 
 # todonotes
 *.tdo
