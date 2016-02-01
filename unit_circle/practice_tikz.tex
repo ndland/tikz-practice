@@ -1,0 +1,41 @@
+\documentclass[tikz,border=5pt]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+
+\begin{document}
+
+  \begin{tikzpicture}[scale=5]
+    % \clip (-0.6,-0.2) rectangle (1.1,1.51);
+
+    \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+    % Axis
+    \draw[->] (-1.5,0) -- (1.5,0) coordinate (x axis);
+    \draw[->] (0,-1.5) -- (0,1.5) coordinate (y axis);
+
+    % cirlce
+    \draw (0,0) circle [radius=1cm];
+
+    \filldraw[fill=green!20!white, draw=green!50!black] (0,0) -- (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm] -- cycle;
+
+    \draw[red,very thick]
+      (30:1cm) -- node[left=1pt,fill=white] {$\sin \alpha$} (30:1cm |- x axis);
+    \draw[blue, very thick]
+      (30:1cm |- x axis) -- node[below=2pt,fill=white] {$\cos \alpha$} (0,0);
+
+    \path [name path=upward line] (1,0) -- (1,1);
+    \path [name path=sloped line] (0,0) -- (30:1.5cm);
+    \draw [name intersections={of=upward line and sloped line, by=t}]
+          [very thick, orange] (1,0) -- node[right=1pt,fill=white]
+          {$\displaystyle \tan \alpha \color{black}=
+          \frac{{\color{red}\sin \alpha}}{\color{blue}\cos \alpha}$} (t);
+
+    \draw (0,0) -- (t);
+
+    \foreach \x/\xtext in {-1,-0.5/-\frac{1}{2}, 1}
+      \draw (\x cm ,1pt) -- (\x cm, -1pt) node[anchor=north, fill=white] {$\xtext$};
+    \foreach \y/\ytext in {-1,-0.5/-\frac{1}{2},0.5/\frac{1}{2}, 1}
+      \draw (1pt, \y cm) -- (-1pt, \y cm) node[anchor=east, fill=white] {$\ytext$};
+  \end{tikzpicture}
+
+\end{document}
